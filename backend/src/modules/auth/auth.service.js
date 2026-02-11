@@ -31,12 +31,17 @@ class AuthService {
     }
   }
 
-  async login(email, password) {
+  async login(identifier, password) {
       try {
-          const user = await User.findOne({email}).select('+password')
+          const user = await User.findOne({
+            $or:[
+              { email: identifier },
+              { phone: identifier }
+            ]
+          }).select('+password')
   
           if(!user){
-              throw new Error('Invalid email');
+              throw new Error('Invalid credentials. User does not exist.');
           }
   
           const isValidPassword = await user.comparePassword(password);

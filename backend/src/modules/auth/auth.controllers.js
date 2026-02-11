@@ -19,9 +19,10 @@ async function signup(req, res) {
 
 async function login(req, res){
     try {
-        let {email, password} = req.body;
+        let {email, phone, password} = req.body;
+        let identifier = email || phone;
 
-        const result = await authService.login(email, password);
+        const result = await authService.login(identifier, password);
 
         res.status(200).json({
             success: true,
