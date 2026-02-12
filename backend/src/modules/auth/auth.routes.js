@@ -5,7 +5,7 @@ import { loginSchema, signUpSchema } from './auth.validation.js';
 
 const router = express.Router();
 
-router.post('/signup',validate(signUpSchema),  signup)
+router.post('/signup',validate(signUpSchema), signup)
 router.post('/login',validate(loginSchema), login)
 
 

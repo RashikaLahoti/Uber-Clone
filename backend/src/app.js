@@ -1,5 +1,6 @@
 import express from 'express';
 import authRoutes from "./modules/auth/auth.routes.js";
+import profileRoutes from "./modules/profile/profile.routes.js";
 
 const app = express();
 
@@ -11,5 +12,6 @@ app.get('/hello', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/profile', profileRoutes);
 
 export default app;
