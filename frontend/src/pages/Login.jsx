@@ -171,6 +171,7 @@ const Login = ({ setToggle }) => {
               Sign Up
             </button>
           </p>
+          <p className="text-zinc-400 text-sm mt-2">Forgot password?</p>
         </div>
       </form>
     </div>
