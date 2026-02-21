@@ -1,15 +1,13 @@
 import mongoose from 'mongoose';
 
 const driverSchema = new mongoose.Schema({
-    // Reference to User collection (who has role='DRIVER')
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
         unique: true // One driver profile per user
     },
-    
-    // PERSONAL INFORMATION
+
     personalInfo: {
         languagePreference: {
             type: String,
@@ -18,7 +16,7 @@ const driverSchema = new mongoose.Schema({
         },
         city: {
             type: String,
-            enum: ['MUMBAI', 'DELHI', 'BANGALORE', 'HYDERABAD', 'CHENNAI', 'KOLKATA', 'PUNE', 'AHMEDABAD'],
+            enum: ['MUMBAI', 'DELHI', 'BANGALORE', 'HYDERABAD', 'CHENNAI', 'KOLKATA', 'PUNE', 'AHMEDABAD', 'BHOPAL', 'INDORE'],
             required: [true, 'City is required']
         },
         profilePicture: {
@@ -99,7 +97,6 @@ const driverSchema = new mongoose.Schema({
         }
     },
     
-    // STATISTICS
     stats: {
         rating: {
             type: Number,
@@ -135,6 +132,7 @@ driverSchema.index({ location: '2dsphere' });
 // Index for faster userId lookups
 driverSchema.index({ userId: 1 });
 
+
 // ============================================
 // PRE-SAVE HOOK: Encrypt Aadhar Number
 // ============================================
@@ -148,6 +146,7 @@ driverSchema.pre('save', function() {
         this.personalInfo.aadharNumber = encrypt(this.personalInfo.aadharNumber);
     }
 });
+
 
 // ============================================
 // PRE-SAVE HOOK: Calculate Profile Completion

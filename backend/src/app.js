@@ -1,6 +1,7 @@
 import express from 'express';
 import authRoutes from "./modules/auth/auth.routes.js";
 import profileRoutes from "./modules/profile/profile.routes.js";
+import driverRoutes from "./modules/driver/driver.routes.js";
 import { swaggerSpec } from './config/swagger.js';
 import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
@@ -30,5 +31,6 @@ app.get('/hello', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/driver', driverRoutes);
 
 export default app;
