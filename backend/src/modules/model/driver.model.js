@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { decrypt, encrypt, maskAadhar } from '../../common/utils/encryption.js';
 
 const driverSchema = new mongoose.Schema({
     userId: {
