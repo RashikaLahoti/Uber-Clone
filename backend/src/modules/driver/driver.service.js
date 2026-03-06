@@ -63,6 +63,12 @@ class DriverService {
     const driver = new Driver(driverData);
     await driver.save();
 
+    // ============================================
+    // STEP 4: Upgrade user role to DRIVER
+    // ============================================
+    // Ensure user has DRIVER role after registration
+    await User.findByIdAndUpdate(userId, { role: "DRIVER" });
+
     // Explicitly refetch with population to ensure all virtuals and refs are resolved
     const populatedDriver = await Driver.findById(driver._id).populate(
       "userId",
@@ -70,7 +76,7 @@ class DriverService {
     );
 
     // ============================================
-    // STEP 4: Return formatted response
+    // STEP 5: Return formatted response
     // ============================================
     return this.formatDriverResponse(populatedDriver);
   }
